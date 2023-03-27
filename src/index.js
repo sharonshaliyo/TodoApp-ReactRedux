@@ -5,17 +5,21 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import { Provider } from 'react-redux';
-import { devToolsEnhancer } from 'redux-devtools-extension'
+import { devToolsEnhancer, composeWithDevTools } from 'redux-devtools-extension'
 
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
 import tasks from './reducers'
 import './index.css'
 
+import logger from './middleware/logger'
+import analytics from './middleware/analytics'
+
 const store = createStore(
   tasks,
-  devToolsEnhancer()
+  composeWithDevTools(applyMiddleware(thunk, logger, analytics))
 //  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  )
+)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 // root.render(

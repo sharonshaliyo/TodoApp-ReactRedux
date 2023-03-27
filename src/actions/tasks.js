@@ -5,14 +5,23 @@ export function uniqueId() {
 
 
 function createTask({ title, description }) {
+    const taskId = uniqueId()
     return {
         type: "CREATE_TASK",
         payload: {
-            id: uniqueId(),
+            id: taskId,
             title,
             description,
             status: 'Unstarted'
-        }
+        },
+        meta: {
+            analytics: {
+                event: 'create_task',
+                data: {
+                    id: taskId,
+                },
+            },
+        },
     }
 }
 
