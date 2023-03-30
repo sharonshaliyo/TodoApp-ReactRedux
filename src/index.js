@@ -14,10 +14,11 @@ import './index.css'
 
 import logger from './middleware/logger'
 import analytics from './middleware/analytics'
+import apiMiddleware from './middleware/api'
 
 const store = createStore(
   tasks,
-  composeWithDevTools(applyMiddleware(thunk, logger, analytics))
+  composeWithDevTools(applyMiddleware(thunk, apiMiddleware, logger, analytics))
 //  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 

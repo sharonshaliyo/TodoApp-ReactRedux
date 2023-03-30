@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TaskList from './TaskList';
-import createTask from '../actions/tasks.js';
+// import createTask from '../actions/tasks.js';
+import { fetchTasks, createTask } from '../actions/index.js';
 
 const TASK_STATUSES = ['Unstarted', 'In Progress', 'Completed'];
 class TasksPage extends Component {
@@ -13,6 +14,10 @@ class TasksPage extends Component {
             title: '',
             description: ''
         }
+    }
+
+    componentDidMount() {
+        this.props.dispatch(fetchTasks('tasks'))
     }
 
     onTitleChange = (e) => {

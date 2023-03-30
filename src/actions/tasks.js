@@ -7,7 +7,7 @@ export function uniqueId() {
 function createTask({ title, description }) {
     const taskId = uniqueId()
     return {
-        type: "CREATE_TASK",
+        type: "CREATE_TASK_STARTED",
         payload: {
             id: taskId,
             title,

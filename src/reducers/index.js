@@ -17,9 +17,24 @@ const mockTasks = [
 
 
 export default function tasks(state = { tasks: mockTasks }, action) {
-    if (action.type === 'CREATE_TASK') {
-        return { tasks: state.tasks.concat(action.payload) }
+    switch (action.type) {
+        case "FETCH_TASKS_SUCCEEDED":
+            
+            return {
+                ...state,
+                tasks: action.payload,
+                isLoading: false
+            };
+        
+        case "CREATE_TASK_SUCCEEDED":
+            return {
+                ...state,
+                tasks: state.tasks.concat(action.payload)
+            }
+
+        default:
+            return state;
     }
 
-    return state
+    
 }
