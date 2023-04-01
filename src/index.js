@@ -16,11 +16,24 @@ import logger from './middleware/logger'
 import analytics from './middleware/analytics'
 import apiMiddleware from './middleware/api'
 
+import createSagaMiddleware from 'redux-saga'
+import rootSaga from './sagas'
+
+const sagaMiddleware = createSagaMiddleware()
+
+
+// const store = createStore(
+//   tasks,
+//   composeWithDevTools(applyMiddleware(thunk, apiMiddleware, logger, analytics))
+// //  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+// )
+
 const store = createStore(
   tasks,
-  composeWithDevTools(applyMiddleware(thunk, apiMiddleware, logger, analytics))
-//  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  composeWithDevTools(applyMiddleware(thunk, sagaMiddleware))
 )
+
+sagaMiddleware.run(rootSaga)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 // root.render(

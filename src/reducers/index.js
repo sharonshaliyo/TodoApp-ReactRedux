@@ -32,6 +32,21 @@ export default function tasks(state = { tasks: mockTasks }, action) {
                 tasks: state.tasks.concat(action.payload)
             }
 
+        case "TIMER_INCREMENT":
+            const nextTasks = state.tasks.map(task => {
+                if (task.id == action.payload.taskId) {
+                    return { ...task, timer: task.timer + 1 }
+                }
+                return task
+            })
+
+            return { ...state, tasks: nextTasks }
+
+        case "TIMER_STOPPED":
+            return {
+                ...state
+            }
+
         default:
             return state;
     }

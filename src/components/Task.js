@@ -8,6 +8,8 @@ const Task = props => {
             </div>
 
             <div className="task-body">{props.task.description}</div>
+            <div className="task­timer">{props.task.timer}s</div>
+
             <hr />
         </div>
     );
