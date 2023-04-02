@@ -27,7 +27,10 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import TasksPage from './components/TasksPage';
+import TasksPage from '../components/TasksPage';
+
+import { filterTasks } from '../actions/index'
+
 
 const mockTasks = [
 {
@@ -45,20 +48,35 @@ const mockTasks = [
 ];
 
 class App extends Component {
+
+  onSearch = searchTerm => {
+    this.props.dispatch(filterTasks(searchTerm))
+  }
+
   render() {
     console.log(this.props)
     return (
       <div className="main-content">
-        <TasksPage tasks={this.props.tasks} />
+        <TasksPage
+          tasks={this.props.tasks}
+          onSearch={this.onSearch}
+          // onCreateTask={this.onCreateTask}
+          isLoading={this.props.isLoading}
+          />
       </div>
     );
   }
 }
 
 function mapStateToProps(state) {
+  const { isLoading, error, searchTerm } = state.tasks
+
+  const tasks = state.tasks.filter(task => {
+    return task.title.match(new RegExp(searchTerm, 'i'))
+  })
   console.log(state)
   return {
-    tasks: state.tasks
+    tasks: { tasks, isLoading, error }
   }
 }
 

@@ -32,3 +32,11 @@ export function createTask({ title, description, status = "Unstarted"}) {
     }
 }
 
+export function filterTasks(searchTerm) {
+    return {
+        type: 'FILTER_TASKS',
+        payload: {
+            searchTerm
+        }
+    }
+}
