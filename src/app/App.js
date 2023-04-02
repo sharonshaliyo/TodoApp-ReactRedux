@@ -74,7 +74,7 @@ function mapStateToProps(state) {
 
   console.log(state)
   return {
-    tasks: getFilteredTasks(tasks, searchTerm), isLoading, error
+    tasks: getFilteredTasks(state), isLoading, error
   }
 }
 

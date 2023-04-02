@@ -1,3 +1,4 @@
+import { createSelector } from 'reselect';
 import { uniqueId } from '../actions/tasks.js';
 
 const initialState = {
@@ -46,8 +47,24 @@ export default function tasks(state = initialState, action) {
     }
 }
 
-export function getFilteredTasks(tasks, searchTerm) {
-    return tasks.filter(task => {
-        return task.title.match(new RegExp(searchTerm, 'i'))
-    })
+// export function getFilteredTasks(tasks, searchTerm) {
+//     return tasks.filter(task => {
+//         return task.title.match(new RegExp(searchTerm, 'i'))
+//     })
+// }
+
+const getTasks = state => {
+    console.log(state)
+    return state.tasks
 }
+const getSearchTerm = state => {
+    console.log(state)
+    return state.searchTerm
+}
+
+export const getFilteredTasks = createSelector(
+    [getTasks, getSearchTerm],
+    (tasks, searchTerm) => {
+        return tasks.filter(task => task.title.match(new RegExp(searchTerm, 'i')))
+    }
+)
