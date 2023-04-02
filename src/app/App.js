@@ -31,6 +31,7 @@ import TasksPage from '../components/TasksPage';
 
 import { filterTasks } from '../actions/index'
 
+import { getFilteredTasks } from '../reducers'
 
 const mockTasks = [
 {
@@ -69,14 +70,11 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-  const { isLoading, error, searchTerm } = state.tasks
+  const { tasks, isLoading, error, searchTerm } = state
 
-  const tasks = state.tasks.filter(task => {
-    return task.title.match(new RegExp(searchTerm, 'i'))
-  })
   console.log(state)
   return {
-    tasks: { tasks, isLoading, error }
+    tasks: getFilteredTasks(tasks, searchTerm), isLoading, error
   }
 }
 
