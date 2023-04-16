@@ -22,7 +22,7 @@ const initialState = {
 }
 
 
-export default function tasks(state = initialState, action) {
+export function tasksReducer(state = initialState, action) {
     switch (action.type) {
         case "FETCH_TASKS_SUCCEEDED":
             
@@ -37,13 +37,56 @@ export default function tasks(state = initialState, action) {
                 ...state,
                 tasks: state.tasks.concat(action.payload)
             }
-
         case "FILTER_TASKS": {
-            return { ...state, searchTerm: action.payload.searchTerm }
-        }
-
+                return { ...state, searchTerm: action.payload.searchTerm }
+            }
         default:
             return state;
+    }
+}
+
+export function projectsReducer(state = initialState, action) {
+    switch (action.type) {
+
+        case 'FETCH_PROJECTS_STARTED':
+            return {
+                ...state,
+                isLoading: true
+            }
+
+        case 'FETCH_PROJECTS_SUCCEEDED': 
+            return {
+                ...state,
+                isLoading: false,
+                items: action.payload.projects
+            }
+        
+        default:
+            return state;
+    }
+}
+
+const initialPageState = {
+    currentProjectId: null,
+    searchTerm: '',
+}
+
+export function pageReducer(state = initialPageState, action) {
+    switch (action.type) {
+        case 'SET_CURRENT_PROJECT_ID': {
+            return {
+                ...state,
+                currentProjectId: action.payload.id
+            }
+        }
+        case 'FILTER_TASKS': {
+            return {
+                ...state, searchTerm: action.payload.searchTerm
+            }
+        }
+        default: {
+            return state
+        }
     }
 }
 
@@ -55,11 +98,11 @@ export default function tasks(state = initialState, action) {
 
 const getTasks = state => {
     console.log(state)
-    return state.tasks
+    return state.tasks.tasks
 }
 const getSearchTerm = state => {
     console.log(state)
-    return state.searchTerm
+    return state.page.searchTerm
 }
 
 export const getFilteredTasks = createSelector(
@@ -68,3 +111,4 @@ export const getFilteredTasks = createSelector(
         return tasks.filter(task => task.title.match(new RegExp(searchTerm, 'i')))
     }
 )
+

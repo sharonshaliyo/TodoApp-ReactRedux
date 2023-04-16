@@ -1,4 +1,5 @@
-import { CALL_API } from '../middleware/api'
+import apiMiddleware, { CALL_API } from '../middleware/api'
+import * as api from '../actions/index'
 
 export const FETCH_TASKS_STARTED = 'FETCH_TASKS_STARTED';
 export const FETCH_TASKS_SUCCEEDED = 'FETCH_TASKS_SUCCEEDED';
@@ -40,3 +41,35 @@ export function filterTasks(searchTerm) {
         }
     }
 }
+
+function fetchProjectsStarted(boards) {
+    return { type: 'FETCH_PROJECTS_STARTED', payload: { boards} }
+}
+
+function fetchProjectsSucceeded(projects) {
+    return { type: 'FETCH_PROJECTS_SUCCEEDED', payload: { projects }}
+}
+
+function fetchProjectsFailed(err) {
+    return { type: 'FETCH_PROJECTS_FAILED', payload: err}
+}
+
+export function fetchProjects() {
+    return (dispatch, getState) => {
+        dispatch(fetchProjectsStarted())
+
+        return api
+            .fetchProjects()
+            .then(resp => {
+                const projects = resp.data;
+
+                dispatch(fetchProjectsSucceeded(projects))
+            })
+            .catch(err => {
+                console.error(err)
+
+                fetchProjectsFailed(err)
+            })
+    }
+}
+

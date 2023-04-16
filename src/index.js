@@ -9,15 +9,26 @@ import { devToolsEnhancer, composeWithDevTools } from 'redux-devtools-extension'
 
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
-import tasks from './reducers'
+import { combineReducers } from 'redux';
+import { projectsReducer, tasksReducer, pageReducer, } from './reducers'
 import './index.css'
 
 import logger from './middleware/logger'
 import analytics from './middleware/analytics'
 import apiMiddleware from './middleware/api'
 
+// const reducer = combineReducers(projectsReducer, tasksReducer, pageReducer)
+
+const rootReducer = (state = {}, action) => {
+  return {
+    projects: projectsReducer(state.projects, action),
+    tasks: tasksReducer(state.tasks, action),
+    page: pageReducer(state.page, action)
+  }
+}
+
 const store = createStore(
-  tasks,
+  rootReducer,
   composeWithDevTools(applyMiddleware(thunk, apiMiddleware, logger, analytics))
 //  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
