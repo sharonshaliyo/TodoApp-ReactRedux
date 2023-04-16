@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import TaskList from './TaskList';
-// import createTask from '../actions/tasks.js';
-import { fetchTasks, createTask } from '../actions/index.js';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Button, TextField } from '@mui/material'
 
-const TASK_STATUSES = ['Unstarted', 'In Progress', 'Completed'];
+import TaskList from './TaskList'
+// import createTask from '../actions/tasks.js'
+import { fetchTasks, createTask } from '../actions/index.js'
+
+const TASK_STATUSES = ['Unstarted', 'In Progress', 'Completed']
 class TasksPage extends Component {
 
     constructor(props) {
@@ -32,22 +34,22 @@ class TasksPage extends Component {
             showNewCardForm: false,
             title: '',
             description: '',
-        });
+        })
     }
     onCreateTask = (e) => {
-        e.preventDefault();
+        e.preventDefault()
         // this.props.onCreateTask({
         //     title: this.state.title,
         //     description: this.state.description,
-        // });
+        // })
         this.props.dispatch(createTask({
             title: this.state.title,
             description: this.state.description,
         }))
-        this.resetForm();
+        this.resetForm()
     }
     toggleForm = () => {
-        this.setState({ showNewCardForm: !this.state.showNewCardForm });
+        this.setState({ showNewCardForm: !this.state.showNewCardForm })
     }
 
     onSearch = e => {
@@ -56,21 +58,21 @@ class TasksPage extends Component {
     }
 
     renderTaskLists() {
-        const { onStatusChange, tasks } = this.props;
+        const { onStatusChange, tasks } = this.props
 
         const filteredTasks = tasks.filter(task => {
             return task.title.match(new RegExp(this.state.searchTerm, 'i'))
         })
 
         return TASK_STATUSES.map(status => {
-            const statusTasks = tasks.filter(task => task.status === status);
+            const statusTasks = tasks.filter(task => task.status === status)
             return <TaskList
                 key={status}
                 status={status}
                 tasks={statusTasks}
                 onStatusChange={onStatusChange}
-            />;
-        });
+            />
+        })
     }
     render() {
         if (this.props.isLoading) {
@@ -80,40 +82,42 @@ class TasksPage extends Component {
         return (
             <div className="task-list">
                 <div className="tasks-header task-list-header">
-                    <input
+                    <TextField
                         onChange={this.onSearch}
                         type="text"
-                        placeholder="Search..."
+                        label="Search..."
                     />
-                    <button
+                    <Button
+                        variant="contained"
                         className="button button-default"
                         onClick={this.toggleForm}
                     >
                         + New task
-                    </button>
+                    </Button>
                 </div>
                 {this.state.showNewCardForm && (
                     <form className="task-list-form" onSubmit={this.onCreateTask}>
-                        <input
+                        <TextField
                             className="full-width-input"
                             onChange={this.onTitleChange}
                             value={this.state.title}
                             type="text"
-                            placeholder="title"
+                            label="title"
                         />
-                        <input
+                        <TextField
                             className="full-width-input"
                             onChange={this.onDescriptionChange}
                             value={this.state.description}
                             type="text"
-                            placeholder="description"
+                            label="description"
                         />
-                        <button
+                        <Button
+                            variant="contained"
                             className="button"
                             type="submit"
                         >
                             Save
-                        </button>
+                        </Button>
                     </form>
                 )}
 
@@ -121,7 +125,7 @@ class TasksPage extends Component {
                     {this.renderTaskLists()}
                 </div>
             </div>
-        );
+        )
     }
 
 }
@@ -132,6 +136,6 @@ class TasksPage extends Component {
 //     }
 // }
 
-// export default connect(null, mapDispatchToProps)(TasksPage);
+// export default connect(null, mapDispatchToProps)(TasksPage)
 
-export default connect()(TasksPage);
+export default connect()(TasksPage)

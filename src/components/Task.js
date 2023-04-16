@@ -1,15 +1,18 @@
 import React from 'react';
+import { Divider, ListItem, ListItemText } from '@mui/material'
+
 const Task = props => {
 
     return (
-        <div className="task">
-            <div className="task-header">
-                <div>{props.task.title}</div>
-            </div>
-
-            <div className="task-body">{props.task.description}</div>
-            <hr />
-        </div>
+        <React.Fragment>
+            <ListItem className="task-header">
+                <ListItemText
+                    primary={props.task.title}
+                    secondary={props.task.description}
+                />
+            </ListItem>
+            <Divider components="li" />
+        </React.Fragment>
     );
 }
 export default Task;
