@@ -32,6 +32,7 @@ import TasksPage from '../components/TasksPage';
 import { filterTasks } from '../actions/index'
 
 import { getFilteredTasks } from '../reducers'
+import { Container } from '@mui/material';
 
 const mockTasks = [
 {
@@ -57,14 +58,14 @@ class App extends Component {
   render() {
     console.log(this.props)
     return (
-      <div className="main-content">
+      <Container maxWidth="xl" sx={{ mt: 2 }}>
         <TasksPage
           tasks={this.props.tasks}
           onSearch={this.onSearch}
           // onCreateTask={this.onCreateTask}
           isLoading={this.props.isLoading}
           />
-      </div>
+      </Container>
     );
   }
 }

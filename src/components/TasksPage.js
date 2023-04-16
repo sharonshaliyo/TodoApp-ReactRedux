@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Button, TextField } from '@mui/material'
+import AddIcon from '@mui/icons-material/Add';
 
 import TaskList from './TaskList'
 // import createTask from '../actions/tasks.js'
@@ -86,13 +87,17 @@ class TasksPage extends Component {
                         onChange={this.onSearch}
                         type="text"
                         label="Search..."
+                        size="small"
                     />
+                </div>
+                <div>
                     <Button
                         variant="contained"
-                        className="button button-default"
                         onClick={this.toggleForm}
+                        size="small"
+                        startIcon={ <AddIcon /> }
                     >
-                        + New task
+                        Add task
                     </Button>
                 </div>
                 {this.state.showNewCardForm && (
@@ -102,19 +107,22 @@ class TasksPage extends Component {
                             onChange={this.onTitleChange}
                             value={this.state.title}
                             type="text"
-                            label="title"
+                            label="Title"
+                            size="small"
                         />
                         <TextField
                             className="full-width-input"
                             onChange={this.onDescriptionChange}
                             value={this.state.description}
                             type="text"
-                            label="description"
+                            label="Description"
+                            size="small"
                         />
                         <Button
                             variant="contained"
                             className="button"
                             type="submit"
+                            size="small"
                         >
                             Save
                         </Button>

@@ -1,17 +1,17 @@
 import React from 'react';
-import { Divider, ListItem, ListItemText } from '@mui/material'
+import { Divider, ListItem, ListItemText, TableCell, TableRow } from '@mui/material'
 
 const Task = props => {
 
     return (
         <React.Fragment>
-            <ListItem className="task-header">
-                <ListItemText
-                    primary={props.task.title}
-                    secondary={props.task.description}
-                />
-            </ListItem>
-            <Divider components="li" />
+            <TableRow className="task-header">
+                <TableCell>{props.task.title}</TableCell>
+                <TableCell>{props.task.description}</TableCell>
+                <TableCell>Medium</TableCell>
+                <TableCell>Thursday</TableCell>
+            </TableRow>
+            {/* <Divider components="tr" /> */}
         </React.Fragment>
     );
 }
