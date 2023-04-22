@@ -1,13 +1,13 @@
 import React from 'react';
-import { Divider, ListItem, ListItemText, TableCell, TableRow } from '@mui/material'
+import { TableCell, TableRow } from '@mui/material'
 
 const Task = props => {
-
     return (
         <React.Fragment>
             <TableRow className="task-header">
                 <TableCell>{props.task.title}</TableCell>
                 <TableCell>{props.task.description}</TableCell>
+                <TableCell>Sharon</TableCell>
                 <TableCell>Medium</TableCell>
                 <TableCell>Thursday</TableCell>
             </TableRow>
@@ -15,4 +15,5 @@ const Task = props => {
         </React.Fragment>
     );
 }
+
 export default Task;

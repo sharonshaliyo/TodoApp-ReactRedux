@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Button, TextField, Stack } from '@mui/material'
+import { Button, TextField, Stack, Typography, InputAdornment } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add';
+// import ViewWeekIcon from '@mui/icons-material/ViewWeek';
+import SearchIcon from '@mui/icons-material/Search';
 
 import TaskList from './TaskList'
 // import createTask from '../actions/tasks.js'
@@ -61,7 +63,7 @@ class TasksPage extends Component {
     renderTaskLists() {
         const { onStatusChange, tasks } = this.props
 
-        const filteredTasks = tasks.filter(task => {
+        const saveTasks = tasks.filter(task => {
             return task.title.match(new RegExp(this.state.searchTerm, 'i'))
         })
 
@@ -82,8 +84,11 @@ class TasksPage extends Component {
 
         return (
             <div className="task-list">
+                <Typography variant="h5" style={{ fontWeight: 600 }} sx={{ mb: 3 }}>
+                    Cross-functional project plan
+                </Typography>
                 {!this.state.showNewCardForm && (<div className="tasks-header task-list-header">
-                    <Stack spacing={2} direction="row" sx={{ mb: 4 }}>
+                    <Stack spacing={2} direction="row" sx={{ mb: 3 }}>
                         <Button
                             variant="contained"
                             onClick={this.toggleForm}
@@ -116,7 +121,6 @@ class TasksPage extends Component {
                             />
                             <Button
                                 variant="contained"
-                                className="button"
                                 type="submit"
                                 size="small"
                             >
@@ -126,14 +130,28 @@ class TasksPage extends Component {
                     </form>
                 )}
 
-                <div>
+                <Stack spacing={4} direction="row">
                     <TextField
-                        onChange={this.onSearch}
-                        type="text"
-                        label="Search..."
                         size="small"
+                        sx={{ mb: 4, width: '24.5ch' }}
+                        variant="outlined"
+                        label="Search"
+                        InputProps={{
+                            endAdornment:(
+                                <InputAdornment position="end">
+                                    <SearchIcon />
+                                </InputAdornment>
+                            ),
+                        }}
                     />
-                </div>
+                    {/* <Button
+                        onClick={this.toggleForm}
+                        size="small"
+                        startIcon={<ViewWeekIcon />}
+                    >
+                        Show fields
+                    </Button> */}
+                </Stack>
 
                 <div className="task-lists">
                     {this.renderTaskLists()}

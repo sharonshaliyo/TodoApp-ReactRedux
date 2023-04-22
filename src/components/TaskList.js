@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Divider, List, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
+import { Box, Divider, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
 import Task from './Task';
 const TaskList = props => {
     return (
@@ -14,6 +14,7 @@ const TaskList = props => {
                         <TableRow>
                             <TableCell>Task</TableCell>
                             <TableCell>Description</TableCell>
+                            <TableCell>Assignee</TableCell>
                             <TableCell>Priority</TableCell>
                             <TableCell>Due date</TableCell>
                         </TableRow>
