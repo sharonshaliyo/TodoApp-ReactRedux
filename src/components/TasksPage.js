@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Button, TextField } from '@mui/material'
+import { Button, TextField, Stack } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add';
 
 import TaskList from './TaskList'
 // import createTask from '../actions/tasks.js'
 import { fetchTasks, createTask } from '../actions/index.js'
 
-const TASK_STATUSES = ['Unstarted', 'In Progress', 'Completed']
+const TASK_STATUSES = ['In Progress', 'Unstarted', 'Completed']
 class TasksPage extends Component {
 
     constructor(props) {
@@ -82,7 +82,51 @@ class TasksPage extends Component {
 
         return (
             <div className="task-list">
-                <div className="tasks-header task-list-header">
+                {!this.state.showNewCardForm && (<div className="tasks-header task-list-header">
+                    <Stack spacing={2} direction="row" sx={{ mb: 4 }}>
+                        <Button
+                            variant="contained"
+                            onClick={this.toggleForm}
+                            size="small"
+                            startIcon={<AddIcon />}
+                        >
+                            Add task
+                        </Button>
+                    </Stack>
+                </div>)}
+
+                {this.state.showNewCardForm && (
+                    <form className="task-list-form" onSubmit={this.onCreateTask}>
+                        <Stack spacing={2} direction="row" sx={{ mb: 4 }} >
+                            <TextField
+                                className="full-width-input"
+                                onChange={this.onTitleChange}
+                                value={this.state.title}
+                                type="text"
+                                label="Task Title"
+                                size="small"
+                            />
+                            <TextField
+                                className="full-width-input"
+                                onChange={this.onDescriptionChange}
+                                value={this.state.description}
+                                type="text"
+                                label="Description"
+                                size="small"
+                            />
+                            <Button
+                                variant="contained"
+                                className="button"
+                                type="submit"
+                                size="small"
+                            >
+                                Save
+                            </Button>
+                        </Stack>
+                    </form>
+                )}
+
+                <div>
                     <TextField
                         onChange={this.onSearch}
                         type="text"
@@ -90,44 +134,6 @@ class TasksPage extends Component {
                         size="small"
                     />
                 </div>
-                <div>
-                    <Button
-                        variant="contained"
-                        onClick={this.toggleForm}
-                        size="small"
-                        startIcon={ <AddIcon /> }
-                    >
-                        Add task
-                    </Button>
-                </div>
-                {this.state.showNewCardForm && (
-                    <form className="task-list-form" onSubmit={this.onCreateTask}>
-                        <TextField
-                            className="full-width-input"
-                            onChange={this.onTitleChange}
-                            value={this.state.title}
-                            type="text"
-                            label="Title"
-                            size="small"
-                        />
-                        <TextField
-                            className="full-width-input"
-                            onChange={this.onDescriptionChange}
-                            value={this.state.description}
-                            type="text"
-                            label="Description"
-                            size="small"
-                        />
-                        <Button
-                            variant="contained"
-                            className="button"
-                            type="submit"
-                            size="small"
-                        >
-                            Save
-                        </Button>
-                    </form>
-                )}
 
                 <div className="task-lists">
                     {this.renderTaskLists()}
@@ -135,7 +141,6 @@ class TasksPage extends Component {
             </div>
         )
     }
-
 }
 
 // function mapDispatchToProps(dispatch) {
