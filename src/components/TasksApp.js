@@ -1,32 +1,12 @@
 import React from 'react'
-import { connect } from 'react-redux';
-import {
-    BrowserRouter,
-    Routes,
-    Route,
-    Link
-} from 'react-router-dom'
-import { Container } from '@mui/material';
+import { connect } from 'react-redux'
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import { Container } from '@mui/material'
 
-import TasksPage from '../components/TasksPage';
+import SimpleTodo from './SimpleTodo'
+import TasksPage from '../components/TasksPage'
 import { filterTasks } from '../actions/index'
 import { getFilteredTasks } from '../reducers'
-
-const mockTasks = [
-    {
-        id: 1,
-        title: 'Learn Redux',
-        description: 'The store, actions, and reducers, oh my!',
-        status: 'In Progress',
-    },
-    {
-        id: 2,
-        title: 'Peace on Earth',
-        description: 'No big deal.',
-        status: 'In Progress',
-    },
-];
-
 
 const TasksApp = (props) => {
     const onSearch = searchTerm => {
@@ -34,16 +14,29 @@ const TasksApp = (props) => {
     }
 
     return <Container maxWidth="xl" sx={{ mt: 2 }}>
-        <TasksPage
-            tasks={props.tasks}
-            onSearch={onSearch}
-            // onCreateTask={this.onCreateTask}
-            isLoading={props.isLoading}
-        />
+        <BrowserRouter>
+            <ul>
+                <li>
+                    <Link to="/">Home</Link>
+                </li>
+                <li>
+                    <Link to="/managetasks">Manage Tasks</Link>
+                </li>
+            </ul>
+            
+            <Routes>
+                <Route exact path="/" element={<SimpleTodo />} ></Route>
+                <Route exact path="/managetasks" element={<TasksPage
+                    tasks={props.tasks}
+                    onSearch={onSearch}
+                    // onCreateTask={this.onCreateTask}
+                    isLoading={props.isLoading}
+                />} ></Route>
+            </Routes>
+            
+        </BrowserRouter>
     </Container>
-
 }
-
 
 function mapStateToProps(state) {
     const { tasks, isLoading, error, searchTerm } = state
@@ -54,6 +47,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(TasksApp);
-
-
+export default connect(mapStateToProps)(TasksApp)
