@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import { Container } from '@mui/material'
 
-import SimpleTodo from './SimpleTodo'
+import SimpleTodo from './SimpleTodo/SimpleTodo'
 import TasksPage from '../components/TasksPage'
 import { filterTasks } from '../actions/index'
 import { getFilteredTasks } from '../reducers'
