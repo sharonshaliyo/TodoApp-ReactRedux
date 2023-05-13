@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Container } from '@mui/material'
+import Link from '@mui/material/Link';
 
 import SimpleTodo from './SimpleTodo/SimpleTodo'
 import TasksPage from '../components/TasksPage'
@@ -15,14 +16,9 @@ const TasksApp = (props) => {
 
     return <Container maxWidth="xl" sx={{ mt: 2 }}>
         <BrowserRouter>
-            <ul>
-                <li>
-                    <Link to="/">Home</Link>
-                </li>
-                <li>
-                    <Link to="/managetasks">Manage Tasks</Link>
-                </li>
-            </ul>
+
+            <Link href="/" underline="always">Home</Link>
+            <Link sx={{ ml: 1 }} href="/managetasks" underline="always">Manage Tasks</Link>
             
             <Routes>
                 <Route exact path="/" element={<SimpleTodo />} ></Route>
