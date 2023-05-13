@@ -2,7 +2,9 @@ import axios from "axios";
 
 export const CALL_API = 'CALL_API'
 
-const API_BASE_URL = 'http://localhost:3001'
+// const API_BASE_URL = 'http://localhost:3001'
+// const API_BASE_URL = 'http://localhost/wordpress/wp-json/tto/v1'
+const API_BASE_URL = 'https://sharonshaliyo.com/wp-json/tto/v1'
 
 function makeCall({ endpoint, method = "GET", body }) {
     const url = `${API_BASE_URL}${endpoint}`

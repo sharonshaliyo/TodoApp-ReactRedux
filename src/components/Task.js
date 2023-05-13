@@ -1,15 +1,19 @@
 import React from 'react';
+import { TableCell, TableRow } from '@mui/material'
+
 const Task = props => {
-
     return (
-        <div className="task">
-            <div className="task-header">
-                <div>{props.task.title}</div>
-            </div>
-
-            <div className="task-body">{props.task.description}</div>
-            <hr />
-        </div>
+        <React.Fragment>
+            <TableRow className="task-header">
+                <TableCell>{props.task.title}</TableCell>
+                <TableCell>{props.task.description}</TableCell>
+                <TableCell>Sharon</TableCell>
+                <TableCell>Medium</TableCell>
+                <TableCell>Thursday</TableCell>
+            </TableRow>
+            {/* <Divider components="tr" /> */}
+        </React.Fragment>
     );
 }
+
 export default Task;

@@ -1,10 +1,15 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import TaskList from './TaskList';
-// import createTask from '../actions/tasks.js';
-import { fetchTasks, createTask } from '../actions/index.js';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Button, TextField, Stack, Typography, InputAdornment } from '@mui/material'
+import AddIcon from '@mui/icons-material/Add';
+// import ViewWeekIcon from '@mui/icons-material/ViewWeek';
+import SearchIcon from '@mui/icons-material/Search';
 
-const TASK_STATUSES = ['Unstarted', 'In Progress', 'Completed'];
+import TaskList from './TaskList'
+// import createTask from '../actions/tasks.js'
+import { fetchTasks, createTask } from '../actions/index.js'
+
+const TASK_STATUSES = ['In Progress', 'Unstarted', 'Completed']
 class TasksPage extends Component {
 
     constructor(props) {
@@ -32,22 +37,22 @@ class TasksPage extends Component {
             showNewCardForm: false,
             title: '',
             description: '',
-        });
+        })
     }
     onCreateTask = (e) => {
-        e.preventDefault();
+        e.preventDefault()
         // this.props.onCreateTask({
         //     title: this.state.title,
         //     description: this.state.description,
-        // });
+        // })
         this.props.dispatch(createTask({
             title: this.state.title,
             description: this.state.description,
         }))
-        this.resetForm();
+        this.resetForm()
     }
     toggleForm = () => {
-        this.setState({ showNewCardForm: !this.state.showNewCardForm });
+        this.setState({ showNewCardForm: !this.state.showNewCardForm })
     }
 
     onSearch = e => {
@@ -56,21 +61,21 @@ class TasksPage extends Component {
     }
 
     renderTaskLists() {
-        const { onStatusChange, tasks } = this.props;
+        const { onStatusChange, tasks } = this.props
 
-        const filteredTasks = tasks.filter(task => {
+        const saveTasks = tasks.filter(task => {
             return task.title.match(new RegExp(this.state.searchTerm, 'i'))
         })
 
         return TASK_STATUSES.map(status => {
-            const statusTasks = tasks.filter(task => task.status === status);
+            const statusTasks = tasks.filter(task => task.status === status)
             return <TaskList
                 key={status}
                 status={status}
                 tasks={statusTasks}
                 onStatusChange={onStatusChange}
-            />;
-        });
+            />
+        })
     }
     render() {
         if (this.props.isLoading) {
@@ -79,51 +84,81 @@ class TasksPage extends Component {
 
         return (
             <div className="task-list">
-                <div className="tasks-header task-list-header">
-                    <input
-                        onChange={this.onSearch}
-                        type="text"
-                        placeholder="Search..."
-                    />
-                    <button
-                        className="button button-default"
-                        onClick={this.toggleForm}
-                    >
-                        + New task
-                    </button>
-                </div>
+                <Typography variant="h5" style={{ fontWeight: 600 }} sx={{ mb: 3 }}>
+                    Cross-functional project plan
+                </Typography>
+                {!this.state.showNewCardForm && (<div className="tasks-header task-list-header">
+                    <Stack spacing={2} direction="row" sx={{ mb: 3 }}>
+                        <Button
+                            variant="contained"
+                            onClick={this.toggleForm}
+                            size="small"
+                            startIcon={<AddIcon />}
+                        >
+                            Add task
+                        </Button>
+                    </Stack>
+                </div>)}
+
                 {this.state.showNewCardForm && (
                     <form className="task-list-form" onSubmit={this.onCreateTask}>
-                        <input
-                            className="full-width-input"
-                            onChange={this.onTitleChange}
-                            value={this.state.title}
-                            type="text"
-                            placeholder="title"
-                        />
-                        <input
-                            className="full-width-input"
-                            onChange={this.onDescriptionChange}
-                            value={this.state.description}
-                            type="text"
-                            placeholder="description"
-                        />
-                        <button
-                            className="button"
-                            type="submit"
-                        >
-                            Save
-                        </button>
+                        <Stack spacing={2} direction="row" sx={{ mb: 4 }} >
+                            <TextField
+                                className="full-width-input"
+                                onChange={this.onTitleChange}
+                                value={this.state.title}
+                                type="text"
+                                label="Task Title"
+                                size="small"
+                            />
+                            <TextField
+                                className="full-width-input"
+                                onChange={this.onDescriptionChange}
+                                value={this.state.description}
+                                type="text"
+                                label="Description"
+                                size="small"
+                            />
+                            <Button
+                                variant="contained"
+                                type="submit"
+                                size="small"
+                            >
+                                Save
+                            </Button>
+                        </Stack>
                     </form>
                 )}
+
+                <Stack spacing={4} direction="row">
+                    <TextField
+                        size="small"
+                        sx={{ mb: 4, width: '24.5ch' }}
+                        variant="outlined"
+                        label="Search"
+                        InputProps={{
+                            endAdornment:(
+                                <InputAdornment position="end">
+                                    <SearchIcon />
+                                </InputAdornment>
+                            ),
+                        }}
+                    />
+                    {/* <Button
+                        onClick={this.toggleForm}
+                        size="small"
+                        startIcon={<ViewWeekIcon />}
+                    >
+                        Show fields
+                    </Button> */}
+                </Stack>
 
                 <div className="task-lists">
                     {this.renderTaskLists()}
                 </div>
             </div>
-        );
+        )
     }
-
 }
 
 // function mapDispatchToProps(dispatch) {
@@ -132,6 +167,6 @@ class TasksPage extends Component {
 //     }
 // }
 
-// export default connect(null, mapDispatchToProps)(TasksPage);
+// export default connect(null, mapDispatchToProps)(TasksPage)
 
-export default connect()(TasksPage);
+export default connect()(TasksPage)
