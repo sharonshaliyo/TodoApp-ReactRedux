@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Box, Button, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
+import { collection, onSnapshot, query } from "firebase/firestore";
+
 
 import SimpleTodoItem from './SimpleTodoItem'
 import { db } from './firebase'
-import { QuerySnapshot, collection, onSnapshot, query } from "firebase/firestore";
 
 export default () => {
     const [todos, setTodos] = useState(['Learn', 'Grind'])
@@ -34,7 +35,6 @@ export default () => {
                     type="text"
                     label="Title"
                     className="full-width-input"
-                    
                     size="small"
                 />
                 <TextField
@@ -59,7 +59,7 @@ export default () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {todos.map(todo => <SimpleTodoItem todo={todo} />)}
+                            {todos.map(todo => <SimpleTodoItem todo={todo} toggleComplete={toggleComplete} />)}
                         </TableBody>
                     </Table>
                 </TableContainer>
