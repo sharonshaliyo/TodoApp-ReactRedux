@@ -1,15 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { Box, Button, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
-import { collection, doc, onSnapshot, query, updateDoc } from "firebase/firestore";
+import { addDoc, collection, doc, onSnapshot, query, updateDoc } from "firebase/firestore";
 
 import SimpleTodoItem from './SimpleTodoItem'
 import { db } from './firebase'
 
 export default () => {
     const [todos, setTodos] = useState([])
+    const [todoForm, setTodoForm] = useState({"title": "", "desc": ""})
+
+    const onFieldChange = (field, value) => {
+        setTodoForm({
+            ...todoForm,
+            [field]: value
+        })
+    }
 
     // Create
+    const createTodo = async () => {
+        
+        if (!todoForm) {
+            console.log('todoForm empty')
+        }
+        await addDoc(collection(db, 'todos'), {
+            ...todoForm,
+            completed: false
+        })
+        setTodoForm({"title": "", "desc": ""})
+    }
     // Read
     useEffect(() => {
         const q = query(collection(db, 'todos'))
@@ -20,7 +39,7 @@ export default () => {
             })
             setTodos(todosArr)
         })
-    })
+    }, [todos])
     // Update
     const toggleComplete = async (todo) => {
         await updateDoc(doc(db, 'todos', todo.id), {
@@ -32,7 +51,7 @@ export default () => {
     return <>
         <div>
             <Typography variant="h5" style={{ fontWeight: 600 }} sx={{ mb: 3, mt: 1 }}>
-                Cross-functional project plan
+                Cross-functional project plan {JSON.stringify(todoForm)}
             </Typography>
             <Stack spacing={2} direction="row" sx={{ mb: 4 }}>
                 <TextField
@@ -40,16 +59,20 @@ export default () => {
                     label="Title"
                     className="full-width-input"
                     size="small"
+                    onChange={(e) => onFieldChange("title", e.target.value)}
+                    value={todoForm["title"]}
                 />
                 <TextField
                     className="full-width-input"
                     type="text"
                     label="Description"
                     size="small"
+                    value={todoForm["desc"]}
+                    onChange={e => onFieldChange("desc", e.target.value)}
                 />
                 <Button
                     variant="contained"
-                    onClick={null}
+                    onClick={createTodo}
                     size="small"
                     startIcon={<AddIcon />}
                 >Add</Button>
