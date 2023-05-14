@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box, Button, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
-import { addDoc, collection, doc, onSnapshot, query, updateDoc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, onSnapshot, query, updateDoc } from "firebase/firestore";
 
 import SimpleTodoItem from './SimpleTodoItem'
 import { db } from './firebase'
@@ -47,11 +47,15 @@ export default () => {
         })
     }
     // Delete
+    const onDeleteTodo = async todo => {
+        await deleteDoc(doc(db, 'todos', todo.id))
+    }
 
     return <>
         <div>
             <Typography variant="h5" style={{ fontWeight: 600 }} sx={{ mb: 3, mt: 1 }}>
-                Cross-functional project plan {JSON.stringify(todoForm)}
+                Cross-functional project plan 
+                {/* {JSON.stringify(todoForm)} */}
             </Typography>
             <Stack spacing={2} direction="row" sx={{ mb: 4 }}>
                 <TextField
@@ -86,7 +90,7 @@ export default () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {todos.map(todo => <SimpleTodoItem todo={todo} toggleComplete={toggleComplete} key={todo.id} />)}
+                            {todos.map(todo => <SimpleTodoItem todo={todo} toggleComplete={toggleComplete} onDeleteTodo={onDeleteTodo} key={todo.id} />)}
                         </TableBody>
                     </Table>
                 </TableContainer>
