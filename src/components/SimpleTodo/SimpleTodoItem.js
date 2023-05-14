@@ -1,10 +1,11 @@
 import { Checkbox, TableCell, TableRow } from '@mui/material'
 import React from 'react'
 
-const SimpleTodoItem = ({ todo }) => {
+const SimpleTodoItem = ({ todo, toggleComplete }) => {
     return (<TableRow className='task-header'>
         <TableCell>
-            <Checkbox checked={ todo.completed } /> { todo.text }
+            <Checkbox onChange={() => toggleComplete(todo)} checked={ todo.completed } />
+            <label onClick={() => toggleComplete(todo)}>{ todo.text }</label>
         </TableCell>
     </TableRow>)
 }

@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Box, Button, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
-import { collection, onSnapshot, query } from "firebase/firestore";
-
+import { collection, doc, onSnapshot, query, updateDoc } from "firebase/firestore";
 
 import SimpleTodoItem from './SimpleTodoItem'
 import { db } from './firebase'
 
 export default () => {
-    const [todos, setTodos] = useState(['Learn', 'Grind'])
+    const [todos, setTodos] = useState([])
 
     // Create
     // Read
@@ -23,6 +22,11 @@ export default () => {
         })
     })
     // Update
+    const toggleComplete = async (todo) => {
+        await updateDoc(doc(db, 'todos', todo.id), {
+            completed: !todo.completed
+        })
+    }
     // Delete
 
     return <>
@@ -59,7 +63,7 @@ export default () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {todos.map(todo => <SimpleTodoItem todo={todo} toggleComplete={toggleComplete} />)}
+                            {todos.map(todo => <SimpleTodoItem todo={todo} toggleComplete={toggleComplete} key={todo.id} />)}
                         </TableBody>
                     </Table>
                 </TableContainer>
