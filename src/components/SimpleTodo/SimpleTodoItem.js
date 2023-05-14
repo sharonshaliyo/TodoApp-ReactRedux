@@ -1,10 +1,10 @@
 import { Checkbox, TableCell, TableRow } from '@mui/material'
 import React from 'react'
 
-const SimpleTodoItem = () => {
+const SimpleTodoItem = ({ todo }) => {
     return (<TableRow className='task-header'>
         <TableCell>
-            <Checkbox checked /> Todo Title
+            <Checkbox checked={ todo.completed } /> { todo.text }
         </TableCell>
     </TableRow>)
 }
