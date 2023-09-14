@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Button, TextField, Stack, Typography, InputAdornment } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add';
-// import ViewWeekIcon from '@mui/icons-material/ViewWeek';
 import SearchIcon from '@mui/icons-material/Search';
 
 import TaskList from './TaskList'
@@ -10,8 +9,8 @@ import TaskList from './TaskList'
 import { fetchTasks, createTask } from '../actions/index.js'
 
 const TASK_STATUSES = ['In Progress', 'Unstarted', 'Completed']
-class TasksPage extends Component {
 
+class TasksPage extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -63,9 +62,9 @@ class TasksPage extends Component {
     renderTaskLists() {
         const { onStatusChange, tasks } = this.props
 
-        const saveTasks = tasks.filter(task => {
-            return task.title.match(new RegExp(this.state.searchTerm, 'i'))
-        })
+        // const saveTasks = tasks.filter(task => {
+        //     return task.title.match(new RegExp(this.state.searchTerm, 'i'))
+        // })
 
         return TASK_STATUSES.map(status => {
             const statusTasks = tasks.filter(task => task.status === status)

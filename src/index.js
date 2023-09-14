@@ -5,11 +5,11 @@ import App from './app/App';
 import reportWebVitals from './reportWebVitals';
 
 import { Provider } from 'react-redux';
-import { devToolsEnhancer, composeWithDevTools } from 'redux-devtools-extension'
+import { /* devToolsEnhancer,*/ composeWithDevTools } from 'redux-devtools-extension'
 
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
-import { combineReducers } from 'redux';
+// import { combineReducers } from 'redux';
 import { projectsReducer, tasksReducer, pageReducer, } from './reducers'
 import './index.css'
 
@@ -45,7 +45,6 @@ root.render(
     <App />
   </Provider>
 )
-
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

@@ -1,4 +1,4 @@
-import apiMiddleware, { CALL_API } from '../middleware/api'
+import { CALL_API } from '../middleware/api'
 import * as api from '../actions/index'
 
 export const FETCH_TASKS_STARTED = 'FETCH_TASKS_STARTED';

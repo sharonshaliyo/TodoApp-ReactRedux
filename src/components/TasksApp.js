@@ -37,9 +37,9 @@ const TasksApp = (props) => {
 }
 
 function mapStateToProps(state) {
-    const { tasks, isLoading, error, searchTerm } = state
+    // const { tasks, isLoading, error, searchTerm } = state
+    const { isLoading, error } = state
 
-    console.log(state)
     return {
         tasks: getFilteredTasks(state), isLoading, error
     }

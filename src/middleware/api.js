@@ -36,7 +36,7 @@ const apiMiddleware = store => next => action => {
         return next(action)
     }
 
-    const [requestStartedType, successType, failureType] = callApi.types
+    const [/* requestStartedType, */ successType, failureType] = callApi.types
 
     // next({ type: requestStartedType })
 
