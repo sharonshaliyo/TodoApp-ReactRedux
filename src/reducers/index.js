@@ -21,11 +21,9 @@ const initialState = {
     searchTerm: ''
 }
 
-
 export function tasksReducer(state = initialState, action) {
     switch (action.type) {
         case "FETCH_TASKS_SUCCEEDED":
-            
             return {
                 ...state,
                 tasks: action.payload,
