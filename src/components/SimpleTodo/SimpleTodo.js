@@ -19,7 +19,6 @@ export default () => {
 
     // Create
     const createTodo = async () => {
-        
         if (!todoForm) {
             console.log('todoForm empty')
         }

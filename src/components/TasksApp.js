@@ -15,22 +15,24 @@ const TasksApp = (props) => {
     }
 
     return <Container maxWidth="xl" sx={{ mt: 2 }}>
-        <BrowserRouter>
+        <SimpleTodo />
+        <div style={{ display: "none" }}>
+            <BrowserRouter style={{ display: "none" }}>
+                <Link href="/" underline="always">Home</Link>
+                <Link sx={{ ml: 1 }} href="/managetasks" underline="always">Manage Tasks</Link>
 
-            <Link href="/" underline="always">Home</Link>
-            <Link sx={{ ml: 1 }} href="/managetasks" underline="always">Manage Tasks</Link>
-            
-            <Routes>
-                <Route exact path="/" element={<SimpleTodo />} ></Route>
-                <Route exact path="/managetasks" element={<TasksPage
-                    tasks={props.tasks}
-                    onSearch={onSearch}
-                    // onCreateTask={this.onCreateTask}
-                    isLoading={props.isLoading}
-                />} ></Route>
-            </Routes>
-            
-        </BrowserRouter>
+                <Routes style={{ display: "none" }}>
+                    <Route exact path="/" element={<SimpleTodo />} ></Route>
+                    <Route exact path="/managetasks" element={<TasksPage
+                        tasks={props.tasks}
+                        onSearch={onSearch}
+                        // onCreateTask={this.onCreateTask}
+                        isLoading={props.isLoading}
+                    />} ></Route>
+                </Routes>
+
+            </BrowserRouter>
+        </div>
     </Container>
 }
 
