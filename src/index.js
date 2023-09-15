@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import './app/index.css';
 import App from './app/App';
 import reportWebVitals from './reportWebVitals';
 
@@ -11,7 +11,6 @@ import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 // import { combineReducers } from 'redux';
 import { projectsReducer, tasksReducer, pageReducer, } from './reducers'
-import './index.css'
 
 import logger from './middleware/logger'
 import analytics from './middleware/analytics'

@@ -53,7 +53,7 @@ const SimpleTodo = () => {
 
     return <>
         <div>
-            <Typography variant="h5" style={{ fontWeight: 600 }} sx={{ mb: 3, mt: 1 }}>
+            <Typography color="primary" variant="h5" style={{ fontWeight: 600 }} sx={{ mb: 3, mt: 1 }}>
                 Cross-functional project plan 
                 {/* {JSON.stringify(todoForm)} */}
             </Typography>

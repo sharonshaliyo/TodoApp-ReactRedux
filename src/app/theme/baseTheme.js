@@ -23,11 +23,22 @@ const baseTheme = createTheme({
         MuiPaper: {
             styleOverrides: {
                 root: {
-                    background: "#393e46"
+                    // background: "#393e46"
+                    background: "#f0f0f0"
                 }
             },
             defaultProps: {
-                elevation: 0
+                elevation: 0,
+                sx: {
+                    padding: 20
+                }
+            }
+        },
+        MuiContainer: {
+            defaultProps: {
+                sx: {
+                    
+                }
             }
         }
     }
