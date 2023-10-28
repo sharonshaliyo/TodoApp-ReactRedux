@@ -6,7 +6,7 @@ import { addDoc, collection, deleteDoc, doc, onSnapshot, query, updateDoc } from
 import SimpleTodoItem from './SimpleTodoItem'
 import { db } from './firebase'
 
-export default () => {
+const SimpleTodo = () => {
     const [todos, setTodos] = useState([])
     const [todoForm, setTodoForm] = useState({"title": "", "desc": ""})
 
@@ -31,7 +31,8 @@ export default () => {
     // Read
     useEffect(() => {
         const q = query(collection(db, 'todos'))
-        const unsubscribe = onSnapshot(q, querySnapshot => {
+        // const unsubscribe = 
+        onSnapshot(q, querySnapshot => {
             let todosArr = []
             querySnapshot.forEach(doc => {
                 todosArr.push({ ...doc.data(), id: doc.id })
@@ -52,7 +53,7 @@ export default () => {
 
     return <>
         <div>
-            <Typography variant="h5" style={{ fontWeight: 600 }} sx={{ mb: 3, mt: 1 }}>
+            <Typography color="primary" variant="h5" style={{ fontWeight: 600 }} sx={{ mb: 3, mt: 1 }}>
                 Cross-functional project plan 
                 {/* {JSON.stringify(todoForm)} */}
             </Typography>
@@ -97,3 +98,5 @@ export default () => {
         </div>
     </>
 }
+
+export default SimpleTodo
