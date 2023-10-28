@@ -75,24 +75,4 @@ export const darkBlueTheme = {
             primary: "rgba(255, 255, 255, 0.84)",
         },
     },
-    components: {
-        MuiPaper: {
-            styleOverrides: {
-                root: {
-                    background: "#24344d"
-                }
-            }
-        },
-        MuiTextField: {
-            styleOverrides: {
-                input: {
-                    color: 'black',
-                    "&::placeholder": {
-                        color: "gray"
-                    }
-                }
-            }
-        }
-    },
-    
 };
