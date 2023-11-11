@@ -65,6 +65,7 @@ const SimpleTodo = () => {
                     size="small"
                     onChange={(e) => onFieldChange("title", e.target.value)}
                     value={todoForm["title"]}
+                    InputProps={{ sx: { borderRadius: '17px' } }}
                 />
                 <TextField
                     className="full-width-input"
@@ -73,6 +74,7 @@ const SimpleTodo = () => {
                     size="small"
                     value={todoForm["desc"]}
                     onChange={e => onFieldChange("desc", e.target.value)}
+                    InputProps={{ sx: { borderRadius: '17px' } }}
                 />
                 <Button
                     variant="contained"

@@ -109,6 +109,8 @@ class TasksPage extends Component {
                                 type="text"
                                 label="Task Title"
                                 size="small"
+                                InputProps={{ sx: { borderRadius: 50 } }}
+                                variant='outlined'
                             />
                             <TextField
                                 className="full-width-input"
