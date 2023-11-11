@@ -5,7 +5,6 @@ import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
 
 import TaskList from './TaskList'
-// import createTask from '../actions/tasks.js'
 import { fetchTasks, createTask } from '../actions/index.js'
 
 const TASK_STATUSES = ['In Progress', 'Unstarted', 'Completed']
@@ -40,10 +39,6 @@ class TasksPage extends Component {
     }
     onCreateTask = (e) => {
         e.preventDefault()
-        // this.props.onCreateTask({
-        //     title: this.state.title,
-        //     description: this.state.description,
-        // })
         this.props.dispatch(createTask({
             title: this.state.title,
             description: this.state.description,
@@ -61,10 +56,6 @@ class TasksPage extends Component {
 
     renderTaskLists() {
         const { onStatusChange, tasks } = this.props
-
-        // const saveTasks = tasks.filter(task => {
-        //     return task.title.match(new RegExp(this.state.searchTerm, 'i'))
-        // })
 
         return TASK_STATUSES.map(status => {
             const statusTasks = tasks.filter(task => task.status === status)
@@ -145,13 +136,6 @@ class TasksPage extends Component {
                             ),
                         }}
                     />
-                    {/* <Button
-                        onClick={this.toggleForm}
-                        size="small"
-                        startIcon={<ViewWeekIcon />}
-                    >
-                        Show fields
-                    </Button> */}
                 </Stack>
 
                 <div className="task-lists">
@@ -161,13 +145,5 @@ class TasksPage extends Component {
         )
     }
 }
-
-// function mapDispatchToProps(dispatch) {
-//     return {
-//         onCreateTask: (t) => dispatch({ type: "CREATE_TASK", payload: t })
-//     }
-// }
-
-// export default connect(null, mapDispatchToProps)(TasksPage)
 
 export default connect()(TasksPage)

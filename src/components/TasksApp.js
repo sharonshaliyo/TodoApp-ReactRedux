@@ -1,8 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Container } from '@mui/material'
-import Link from '@mui/material/Link';
+import { Container, Link } from '@mui/material'
 
 import SimpleTodo from './SimpleTodo/SimpleTodo'
 import TasksPage from '../components/TasksPage'
@@ -26,7 +25,6 @@ const TasksApp = (props) => {
                     <Route exact path="/managetasks" element={<TasksPage
                         tasks={props.tasks}
                         onSearch={onSearch}
-                        // onCreateTask={this.onCreateTask}
                         isLoading={props.isLoading}
                     />} ></Route>
                 </Routes>
@@ -37,7 +35,6 @@ const TasksApp = (props) => {
 }
 
 function mapStateToProps(state) {
-    // const { tasks, isLoading, error, searchTerm } = state
     const { isLoading, error } = state
 
     return {

@@ -28,6 +28,7 @@ const SimpleTodo = () => {
         })
         setTodoForm({"title": "", "desc": ""})
     }
+
     // Read
     useEffect(() => {
         const q = query(collection(db, 'todos'))
@@ -40,12 +41,14 @@ const SimpleTodo = () => {
             setTodos(todosArr)
         })
     }, [todos])
+
     // Update
     const toggleComplete = async (todo) => {
         await updateDoc(doc(db, 'todos', todo.id), {
             completed: !todo.completed
         })
     }
+
     // Delete
     const onDeleteTodo = async todo => {
         await deleteDoc(doc(db, 'todos', todo.id))
