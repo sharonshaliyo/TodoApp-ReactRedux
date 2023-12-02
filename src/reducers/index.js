@@ -88,12 +88,6 @@ export function pageReducer(state = initialPageState, action) {
     }
 }
 
-// export function getFilteredTasks(tasks, searchTerm) {
-//     return tasks.filter(task => {
-//         return task.title.match(new RegExp(searchTerm, 'i'))
-//     })
-// }
-
 const getTasks = state => {
     console.log(state)
     return state.tasks.tasks

@@ -28,6 +28,7 @@ const SimpleTodo = () => {
         })
         setTodoForm({"title": "", "desc": ""})
     }
+
     // Read
     useEffect(() => {
         const q = query(collection(db, 'todos'))
@@ -40,12 +41,14 @@ const SimpleTodo = () => {
             setTodos(todosArr)
         })
     }, [todos])
+
     // Update
     const toggleComplete = async (todo) => {
         await updateDoc(doc(db, 'todos', todo.id), {
             completed: !todo.completed
         })
     }
+
     // Delete
     const onDeleteTodo = async todo => {
         await deleteDoc(doc(db, 'todos', todo.id))
@@ -65,6 +68,7 @@ const SimpleTodo = () => {
                     size="small"
                     onChange={(e) => onFieldChange("title", e.target.value)}
                     value={todoForm["title"]}
+                    InputProps={{ sx: { borderRadius: '17px' } }}
                 />
                 <TextField
                     className="full-width-input"
@@ -73,6 +77,7 @@ const SimpleTodo = () => {
                     size="small"
                     value={todoForm["desc"]}
                     onChange={e => onFieldChange("desc", e.target.value)}
+                    InputProps={{ sx: { borderRadius: '17px' } }}
                 />
                 <Button
                     variant="contained"

@@ -16,7 +16,7 @@ const themeMap = {
 const App = (props) => {
   const [theme, setTheme] = useState(baseTheme)
   const handleSwitch = (whichTheme) => {
-    // const newTheme = deepmerge(baseTheme, whichTheme)
+
     setTheme(createTheme(whichTheme))
   }
   const [ themeId, setThemeId ] = useState('light')
@@ -25,7 +25,7 @@ const App = (props) => {
     setThemeId(newThemeId)
     setTheme(createTheme(themeMap[newThemeId]))
   }
-  console.log(props)
+
   return (<ThemeProvider theme={theme}>
     <Container>
       <Paper sx={{ height: "100%", padding: "20px" }} className="App">
