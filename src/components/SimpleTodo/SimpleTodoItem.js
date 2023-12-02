@@ -7,7 +7,6 @@ const SimpleTodoItem = ({ todo, toggleComplete, onDeleteTodo }) => {
         <TableCell>
             <Checkbox onChange={() => toggleComplete(todo)} checked={ todo.completed } />
             <label onClick={() => toggleComplete(todo)}>{ todo.title } </label>
-            
         </TableCell>
         <TableCell>
             <IconButton onClick={() => onDeleteTodo(todo)}>
