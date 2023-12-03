@@ -1,6 +1,23 @@
 {
-    "extends": ["standard", "plugin:react/recommended"],
+    "extends": [
+        "standard",
+        "plugin:react/recommended"
+    ],
     "rules": {
-        "indent": [ "WARN", 4 ]
-    }
+        "indent": [
+            "WARN",
+            4
+        ]
+    },
+    "overrides": [
+        {
+            "files": [
+                "**/*.test.js",
+                "**/*.test.jsx"
+            ],
+            "env": {
+                "jest": true
+            }
+        }
+    ]
 }
