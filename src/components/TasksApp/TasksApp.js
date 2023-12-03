@@ -3,10 +3,9 @@ import { connect } from 'react-redux'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Container, Link } from '@mui/material'
 
-import SimpleTodo from './SimpleTodo/SimpleTodo'
-import TasksPage from '../components/TasksPage'
-import { filterTasks } from '../actions/index'
-import { getFilteredTasks } from '../reducers'
+import TasksPage from './TasksPage'
+import { filterTasks } from '../../actions/index'
+import { getFilteredTasks } from '../../reducers'
 
 const TasksApp = (props) => {
     const onSearch = searchTerm => {
@@ -14,21 +13,19 @@ const TasksApp = (props) => {
     }
 
     return <Container maxWidth="xl" sx={{ mt: 2 }}>
-        <SimpleTodo />
         <div style={{ display: "none" }}>
             <BrowserRouter style={{ display: "none" }}>
                 <Link href="/" underline="always">Home</Link>
                 <Link sx={{ ml: 1 }} href="/managetasks" underline="always">Manage Tasks</Link>
 
                 <Routes style={{ display: "none" }}>
-                    <Route exact path="/" element={<SimpleTodo />} ></Route>
+                    {/* <Route exact path="/" element={<SimpleTodo />} ></Route> */}
                     <Route exact path="/managetasks" element={<TasksPage
                         tasks={props.tasks}
                         onSearch={onSearch}
                         isLoading={props.isLoading}
                     />} ></Route>
                 </Routes>
-
             </BrowserRouter>
         </div>
     </Container>

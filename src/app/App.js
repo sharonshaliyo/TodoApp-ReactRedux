@@ -4,7 +4,8 @@ import {
     ThemeProvider, createTheme, Paper, Button, Container, Switch, Link, Box
 } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import TasksApp from '../components/TasksApp'
+import SimpleTodo from '../components/SimpleTodo'
+import TasksApp from '../components/TasksApp/TasksApp'
 import baseTheme from './theme/baseTheme';
 // import { deepmerge } from '@mui/utils'
 
@@ -66,6 +67,7 @@ const App = (props) => {
                         <GitHubIcon /> GitHub
                     </Link>
                 </Box>
+                <SimpleTodo />
                 <TasksApp />
             </Paper>
         </Container>

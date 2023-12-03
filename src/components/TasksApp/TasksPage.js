@@ -5,7 +5,7 @@ import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
 
 import TaskList from './TaskList'
-import { fetchTasks, createTask } from '../actions/index.js'
+import { fetchTasks, createTask } from '../../actions/index.js'
 
 const TASK_STATUSES = ['In Progress', 'Unstarted', 'Completed']
 
