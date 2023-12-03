@@ -1,3 +1,1 @@
-import SimpleTodo from './SimpleTodo'
-
-export default SimpleTodo
+export { default } from './SimpleTodo'
