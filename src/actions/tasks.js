@@ -1,13 +1,13 @@
-let _id = 1;
+let _id = 1
 
-export function uniqueId() {
-    return _id++;
+export function uniqueId () {
+    return _id++
 }
 
-function createTask({ title, description }) {
+function createTask ({ title, description }) {
     const taskId = uniqueId()
     return {
-        type: "CREATE_TASK_STARTED",
+        type: 'CREATE_TASK_STARTED',
         payload: {
             id: taskId,
             title,
@@ -18,11 +18,11 @@ function createTask({ title, description }) {
             analytics: {
                 event: 'create_task',
                 data: {
-                    id: taskId,
-                },
-            },
-        },
+                    id: taskId
+                }
+            }
+        }
     }
 }
 
-export default createTask;
+export default createTask

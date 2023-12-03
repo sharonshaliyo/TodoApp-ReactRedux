@@ -3,7 +3,7 @@ const analytics = store => next => action => {
         return next(action)
     }
 
-    const { event, data } = action.meta.analytics;
+    const { event, data } = action.meta.analytics
 
     fakeAnalyticsApi(event, data)
         .then(resp => {
@@ -11,17 +11,16 @@ const analytics = store => next => action => {
         })
         .catch(err => {
             console.error('An error occurred while sending analytics:',
-            err.toString())
+                err.toString())
         })
 
     return next(action)
 }
 
-function fakeAnalyticsApi(eventName, data) {
+function fakeAnalyticsApi (eventName, data) {
     return new Promise((resolve, reject) => {
         resolve('Success!')
     })
 }
 
-export default analytics;
-
+export default analytics

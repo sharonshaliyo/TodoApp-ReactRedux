@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import { TableCell, TableRow } from '@mui/material'
 
 const Task = props => (<>
@@ -11,4 +11,4 @@ const Task = props => (<>
     </TableRow>
 </>)
 
-export default Task;
+export default Task
