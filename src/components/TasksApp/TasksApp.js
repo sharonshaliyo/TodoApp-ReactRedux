@@ -13,12 +13,12 @@ const TasksApp = (props) => {
     }
 
     return <Container maxWidth="xl" sx={{ mt: 2 }}>
-        <div style={{ display: "none" }}>
-            <BrowserRouter style={{ display: "none" }}>
+        <div style={{ display: 'none' }}>
+            <BrowserRouter style={{ display: 'none' }}>
                 <Link href="/" underline="always">Home</Link>
                 <Link sx={{ ml: 1 }} href="/managetasks" underline="always">Manage Tasks</Link>
 
-                <Routes style={{ display: "none" }}>
+                <Routes style={{ display: 'none' }}>
                     {/* <Route exact path="/" element={<SimpleTodo />} ></Route> */}
                     <Route exact path="/managetasks" element={<TasksPage
                         tasks={props.tasks}
@@ -31,7 +31,7 @@ const TasksApp = (props) => {
     </Container>
 }
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
     const { isLoading, error } = state
 
     return {

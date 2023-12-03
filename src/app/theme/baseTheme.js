@@ -1,9 +1,9 @@
-import { createTheme } from "@mui/material"
+import { createTheme } from '@mui/material'
 
 const baseTheme = createTheme({
     palette: {
-        mode: 'light',
-    },
+        mode: 'light'
+    }
 })
 
 export default baseTheme

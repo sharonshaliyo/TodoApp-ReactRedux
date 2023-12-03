@@ -35,24 +35,24 @@ export const lightTheme = `{
 export const darkTheme = {
     palette: {
         primary: {
-            main: "#1769aa"
+            main: '#1769aa'
         },
         secondary: {
-            main: "#00b0ff"
+            main: '#00b0ff'
         }
     },
     components: {
         MuiButton: {
             disableRipple: true,
-            size: "large",
+            size: 'large',
             sx: {
-                borderRadius: "10px"
+                borderRadius: '10px'
             }
         },
         MuiPaper: {
             styleOverrides: {
                 root: {
-                    background: "gray"
+                    background: 'gray'
                 }
             },
             defaultProps: {
@@ -66,13 +66,13 @@ export const darkBlueTheme = {
     palette: {
         mode: 'dark',
         primary: {
-            main: '#5893df',
+            main: '#5893df'
         },
         secondary: {
-            main: '#2ec5d3',
+            main: '#2ec5d3'
         },
         text: {
-            primary: "rgba(255, 255, 255, 0.84)",
-        },
-    },
-};
+            primary: 'rgba(255, 255, 255, 0.84)'
+        }
+    }
+}

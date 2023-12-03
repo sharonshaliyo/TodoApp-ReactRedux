@@ -25,7 +25,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "npx eslint \"src/**/*.{js,jsx}\" && react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -47,6 +47,10 @@
     ]
   },
   "devDependencies": {
-    "redux-devtools-extension": "^2.13.9"
+    "eslint": "^8.55.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-react": "^7.33.2",
+    "redux-devtools-extension": "^2.13.9",
+    "standard": "^17.1.0"
   }
 }

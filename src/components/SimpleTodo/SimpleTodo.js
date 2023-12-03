@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { Box, Button, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
-import AddIcon from '@mui/icons-material/Add';
-import { addDoc, collection, deleteDoc, doc, onSnapshot, query, updateDoc } from "firebase/firestore";
+import React, { useEffect, useState } from 'react'
+import { Box, Button, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@mui/material'
+import AddIcon from '@mui/icons-material/Add'
+import { addDoc, collection, deleteDoc, doc, onSnapshot, query, updateDoc } from 'firebase/firestore'
 
 import SimpleTodoItem from './SimpleTodoItem'
 import { db } from './firebase'
 
 const SimpleTodo = () => {
     const [todos, setTodos] = useState([])
-    const [todoForm, setTodoForm] = useState({"title": "", "desc": ""})
+    const [todoForm, setTodoForm] = useState({ title: '', desc: '' })
 
     const onFieldChange = (field, value) => {
         setTodoForm({
@@ -26,15 +26,15 @@ const SimpleTodo = () => {
             ...todoForm,
             completed: false
         })
-        setTodoForm({"title": "", "desc": ""})
+        setTodoForm({ title: '', desc: '' })
     }
 
     // Read
     useEffect(() => {
         const q = query(collection(db, 'todos'))
-        // const unsubscribe = 
+        // const unsubscribe =
         onSnapshot(q, querySnapshot => {
-            let todosArr = []
+            const todosArr = []
             querySnapshot.forEach(doc => {
                 todosArr.push({ ...doc.data(), id: doc.id })
             })
@@ -57,7 +57,7 @@ const SimpleTodo = () => {
     return <>
         <div>
             <Typography color="primary" variant="h5" style={{ fontWeight: 600 }} sx={{ mb: 3, mt: 1 }}>
-                Cross-functional project plan 
+                Cross-functional project plan
                 {/* {JSON.stringify(todoForm)} */}
             </Typography>
             <Stack spacing={2} direction="row" sx={{ mb: 4 }}>
@@ -66,8 +66,8 @@ const SimpleTodo = () => {
                     label="Title"
                     className="full-width-input"
                     size="small"
-                    onChange={(e) => onFieldChange("title", e.target.value)}
-                    value={todoForm["title"]}
+                    onChange={(e) => onFieldChange('title', e.target.value)}
+                    value={todoForm.title}
                     InputProps={{ sx: { borderRadius: '17px' } }}
                 />
                 <TextField
@@ -75,8 +75,8 @@ const SimpleTodo = () => {
                     type="text"
                     label="Description"
                     size="small"
-                    value={todoForm["desc"]}
-                    onChange={e => onFieldChange("desc", e.target.value)}
+                    value={todoForm.desc}
+                    onChange={e => onFieldChange('desc', e.target.value)}
                     InputProps={{ sx: { borderRadius: '17px' } }}
                 />
                 <Button

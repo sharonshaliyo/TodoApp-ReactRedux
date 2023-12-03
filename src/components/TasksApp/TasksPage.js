@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Button, TextField, Stack, Typography, InputAdornment } from '@mui/material'
-import AddIcon from '@mui/icons-material/Add';
-import SearchIcon from '@mui/icons-material/Search';
+import AddIcon from '@mui/icons-material/Add'
+import SearchIcon from '@mui/icons-material/Search'
 
 import TaskList from './TaskList'
 import { fetchTasks, createTask } from '../../actions/index.js'
@@ -10,7 +10,7 @@ import { fetchTasks, createTask } from '../../actions/index.js'
 const TASK_STATUSES = ['In Progress', 'Unstarted', 'Completed']
 
 class TasksPage extends Component {
-    constructor(props) {
+    constructor (props) {
         super(props)
         this.state = {
             showNewCardForm: false,
@@ -19,7 +19,7 @@ class TasksPage extends Component {
         }
     }
 
-    componentDidMount() {
+    componentDidMount () {
         this.props.dispatch(fetchTasks('tasks'))
     }
 
@@ -30,21 +30,24 @@ class TasksPage extends Component {
     onDescriptionChange = (e) => {
         this.setState({ description: e.target.value })
     }
-    resetForm() {
+
+    resetForm () {
         this.setState({
             showNewCardForm: false,
             title: '',
-            description: '',
+            description: ''
         })
     }
+
     onCreateTask = (e) => {
         e.preventDefault()
         this.props.dispatch(createTask({
             title: this.state.title,
-            description: this.state.description,
+            description: this.state.description
         }))
         this.resetForm()
     }
+
     toggleForm = () => {
         this.setState({ showNewCardForm: !this.state.showNewCardForm })
     }
@@ -54,7 +57,7 @@ class TasksPage extends Component {
         this.props.onSearch(e.target.value)
     }
 
-    renderTaskLists() {
+    renderTaskLists () {
         const { onStatusChange, tasks } = this.props
 
         return TASK_STATUSES.map(status => {
@@ -67,7 +70,8 @@ class TasksPage extends Component {
             />
         })
     }
-    render() {
+
+    render () {
         if (this.props.isLoading) {
             return <div className='tasks-loading'>Loading ...</div>
         }
@@ -129,11 +133,11 @@ class TasksPage extends Component {
                         variant="outlined"
                         label="Search"
                         InputProps={{
-                            endAdornment:(
+                            endAdornment: (
                                 <InputAdornment position="end">
                                     <SearchIcon />
                                 </InputAdornment>
-                            ),
+                            )
                         }}
                     />
                 </Stack>

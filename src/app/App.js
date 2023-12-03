@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { lightTheme, darkTheme, darkBlueTheme } from './theme';
+import React, { useState } from 'react'
+import { lightTheme, darkTheme, darkBlueTheme } from './theme'
 import {
     ThemeProvider, createTheme, Paper, Button, Container, Switch, Link, Box
-} from '@mui/material';
-import GitHubIcon from '@mui/icons-material/GitHub';
+} from '@mui/material'
+import GitHubIcon from '@mui/icons-material/GitHub'
 import SimpleTodo from '../components/SimpleTodo'
 import TasksApp from '../components/TasksApp/TasksApp'
-import baseTheme from './theme/baseTheme';
+import baseTheme from './theme/baseTheme'
 // import { deepmerge } from '@mui/utils'
 
 const themeMap = {
@@ -28,7 +28,7 @@ const App = (props) => {
 
     return (<ThemeProvider theme={theme}>
         <Container>
-            <Paper sx={{ height: "100%", padding: "20px" }} className="App">
+            <Paper sx={{ height: '100%', padding: '20px' }} className="App">
                 <Box sx={{ display: 'flex' }}>
                     Switch Theme
                     <Button onClick={() => setTheme(baseTheme)} variant="contained" color="primary" style={{ display: 'none' }}>
@@ -71,7 +71,7 @@ const App = (props) => {
                 <TasksApp />
             </Paper>
         </Container>
-    </ThemeProvider>);
+    </ThemeProvider>)
 }
 
-export default App;
+export default App
