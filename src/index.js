@@ -1,19 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './app/index.css';
-import App from './app/App';
-import reportWebVitals from './reportWebVitals';
-
 import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension'
-
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
-import { projectsReducer, tasksReducer, pageReducer, } from './reducers'
 
+import { projectsReducer, tasksReducer, pageReducer, } from './reducers'
 import logger from './middleware/logger'
 import analytics from './middleware/analytics'
 import apiMiddleware from './middleware/api'
+import './app/index.css';
+import reportWebVitals from './reportWebVitals';
+import App from './app/App';
 
 const rootReducer = (state = {}, action) => {
   return {
