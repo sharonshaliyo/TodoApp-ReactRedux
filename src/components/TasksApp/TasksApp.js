@@ -5,7 +5,7 @@ import { Container, Link } from '@mui/material'
 
 import TasksPage from './TasksPage'
 import { filterTasks } from '../../actions/index'
-import { getFilteredTasks } from '../../reducers'
+import { getFilteredTasks } from '../../state'
 
 const TasksApp = (props) => {
     const onSearch = searchTerm => {
