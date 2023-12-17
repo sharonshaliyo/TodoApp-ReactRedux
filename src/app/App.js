@@ -4,8 +4,8 @@ import {
     ThemeProvider, createTheme, Paper, Button, Container, Switch, Link, Box
 } from '@mui/material'
 import GitHubIcon from '@mui/icons-material/GitHub'
-import SimpleTodo from '../components/SimpleTodo'
-// import SimpleTodo, { VerticalDraggableContainer } from '../components/SimpleTodo'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import SimpleTodo, { VerticalDraggableContainer } from '../components/SimpleTodo'
 import TasksApp from '../components/TasksApp/TasksApp'
 import baseTheme from './theme/baseTheme'
 // import { deepmerge } from '@mui/utils'
@@ -68,9 +68,17 @@ const App = (props) => {
                         <GitHubIcon /> GitHub
                     </Link>
                 </Box>
-                {/* <VerticalDraggableContainer /> */}
-                <SimpleTodo />
-                {/* <TasksApp /> */}
+                <BrowserRouter>
+                    <Link href="/">Home</Link>
+                    <Link sx={{ ml: 2 }} href="/vertical">Vertical Tasks</Link>
+                    {/* <Link sx={{ ml: 2 }} href="/tasksapp">Tasks App</Link> */}
+
+                    <Routes >
+                        <Route exact path="/" element={ <SimpleTodo /> } ></Route>
+                        <Route exact path="/vertical" element={ <VerticalDraggableContainer /> } ></Route>
+                        <Route exact path="/tasksapp" element={ <TasksApp /> } ></Route>
+                    </Routes>
+                </BrowserRouter>
             </Paper>
         </Container>
     </ThemeProvider>)
