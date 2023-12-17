@@ -2,10 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
-import { configureStore, createSlice } from '@reduxjs/toolkit'
-import { projectsReducer, tasksReducer, pageReducer } from './state'
+import { configureStore } from '@reduxjs/toolkit'
 import logger from './middleware/logger'
 import analytics from './middleware/analytics'
 import apiMiddleware from './middleware/api'
@@ -14,22 +12,12 @@ import reportWebVitals from './reportWebVitals'
 import App from './app/App'
 import todosSlice from './state/todosSlice'
 
-const rootReducer = (state = {}, action) => {
-    return {
-        projects: projectsReducer(state.projects, action),
-        tasks: tasksReducer(state.tasks, action),
-        page: pageReducer(state.page, action)
-    }
-}
-
 const store = configureStore({
     reducer: {
         todosReducer: todosSlice.reducer
     }
 })
-
 const root = ReactDOM.createRoot(document.getElementById('root'))
-
 root.render(<Provider store={store}>
     <App />
 </Provider>)
