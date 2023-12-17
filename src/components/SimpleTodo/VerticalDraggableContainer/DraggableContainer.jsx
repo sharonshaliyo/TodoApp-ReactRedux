@@ -1,26 +1,41 @@
-import React, { useState } from 'react';
+import React, { useReducer, useState } from 'react';
 import { SLOT_HEIGHT, SLOT_STYLE } from './constants'
 
+const slots = Array(25).fill(null).map((_, index) => ({ id: index, name: '' }));
+const initialState = {
+    items: slots
+}
+const reducer = (state, action) => {
+    switch (action.type) {
+        case "setItems":
+            return {
+                ...state,
+                items: action.payload
+            }
+        default:
+            return state;
+    }
+}
+
 const VerticalDraggableContainer = () => {
-    const slots = Array(25).fill(null).map((_, index) => ({ id: index + 1, name: '' }));
-    const [items, setItems] = useState(slots);
+    const [itemsState, dispatch] = useReducer(reducer, initialState)
     const [newItem, setNewItem] = useState({ name: '', details: ''});
     const [draggedItem, setDraggedItem] = useState(null);
 
     const handleAddItem = () => {
         if (newItem.name.trim() === '')
             return
-        setItems((prevItems) => {
-            const updatedItems = [...prevItems];
+        dispatch({ type: 'setItems', payload: (() => {
+            const updatedItems = [...itemsState.items];
             const emptySlotIndex = updatedItems.findIndex(item => item.name === '');
             if (emptySlotIndex !== -1) {
                 updatedItems[emptySlotIndex] = {
-                    id: emptySlotIndex + 1,
+                    id: emptySlotIndex,
                     name: `${newItem.name}${newItem.details? " : " + newItem.details : "" }`
                 };
             }
             return updatedItems;
-        });
+        })() })
         setNewItem({ name: '', details: ''});
     };
 
@@ -33,12 +48,12 @@ const VerticalDraggableContainer = () => {
         if (draggedItem === null || Math.abs(draggedItem - index) !== 1) {
             return;
         }
-        setItems((prevItems) => {
-            const updatedItems = [...prevItems];
+        dispatch({ type: 'setItems', payload: (() => {
+            const updatedItems = [...itemsState.items];
             updatedItems[index].name = updatedItems[draggedItem].name
             updatedItems[draggedItem].name = ""
             return updatedItems;
-        });
+        })() })
         setDraggedItem(index);
     };
 
@@ -46,6 +61,7 @@ const VerticalDraggableContainer = () => {
         setDraggedItem(null);
     };
 
+    console.log(itemsState)
     return (
         <div>
             <div style={{ margin: '10px 0' }}>
@@ -66,7 +82,7 @@ const VerticalDraggableContainer = () => {
                 <button onClick={handleAddItem}>Add Item</button>
             </div>
             <div style={{ width: '300px', height: '1000px', position: 'relative' }}>
-                {items.map((item, index) => (
+                { itemsState.items.map((item, index) => (
                     <div key={item.id} style={{ display: 'flex' }}>
                         <span style={{ marginLeft: 10 }}>{item.id}: </span>
                         <div
@@ -77,8 +93,8 @@ const VerticalDraggableContainer = () => {
                                 cursor: item.name === '' ? 'default' : 'grab'
                             }}
                             draggable={item.name !== ''}
-                            onDragStart={ e => handleDragStart(e, index) }
-                            onDragOver={ e => handleDragOver(e, index) }
+                            onDragStart={e => handleDragStart(e, index)}
+                            onDragOver={e => handleDragOver(e, index)}
                             onDragEnd={handleDragEnd}
                         >
                             <span>{item.name}</span>
