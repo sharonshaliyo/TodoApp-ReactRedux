@@ -4,14 +4,15 @@ import { Provider } from 'react-redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
-
-import { projectsReducer, tasksReducer, pageReducer } from './reducers'
+import { configureStore, createSlice } from '@reduxjs/toolkit'
+import { projectsReducer, tasksReducer, pageReducer } from './state'
 import logger from './middleware/logger'
 import analytics from './middleware/analytics'
 import apiMiddleware from './middleware/api'
 import './app/index.css'
 import reportWebVitals from './reportWebVitals'
 import App from './app/App'
+import todosSlice from './state/todosSlice'
 
 const rootReducer = (state = {}, action) => {
     return {
@@ -21,10 +22,11 @@ const rootReducer = (state = {}, action) => {
     }
 }
 
-const store = createStore(
-    rootReducer,
-    composeWithDevTools(applyMiddleware(thunk, apiMiddleware, logger, analytics))
-)
+const store = configureStore({
+    reducer: {
+        todosReducer: todosSlice.reducer
+    }
+})
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 
