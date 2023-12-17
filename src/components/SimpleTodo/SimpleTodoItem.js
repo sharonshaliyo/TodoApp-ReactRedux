@@ -4,6 +4,7 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 import PropTypes from 'prop-types';
 
 const SimpleTodoItem = ({ todo, toggleComplete, onDeleteTodo }) => {
+  console.log('SimpleTodoItem render', todo.title)
   return (<TableRow className='task-header'>
     <TableCell>
       <Checkbox onChange={() => toggleComplete(todo)} checked={todo.completed} />
@@ -18,9 +19,9 @@ const SimpleTodoItem = ({ todo, toggleComplete, onDeleteTodo }) => {
 }
 
 SimpleTodoItem.propTypes = {
-  todo: PropTypes.obj,
+  todo: PropTypes.object,
   toggleComplete: PropTypes.func,
   onDeleteTodo: PropTypes.func
 }
 
-export default SimpleTodoItem
+export default React.memo(SimpleTodoItem)

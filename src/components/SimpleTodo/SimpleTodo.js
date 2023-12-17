@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { Box, Button, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import { addDoc, collection, deleteDoc, doc, onSnapshot, query, updateDoc } from 'firebase/firestore'
@@ -42,20 +42,23 @@ const SimpleTodo = () => {
         todosArr.push({ ...doc.data(), id: doc.id })
       })
       dispatch(todosSlice.actions.setTodos(todosArr))
+      console.log('onSnapshot')
     })
+    console.log('useEffect')
   }, [])
 
   // Update
-  const toggleComplete = async (todo) => {
+  const toggleComplete = useCallback(async (todo) => {
     await updateDoc(doc(db, 'todos', todo.id), {
       completed: !todo.completed
     })
-  }
+  }, [])
 
   // Delete
-  const onDeleteTodo = async todo => {
+  const onDeleteTodo = useCallback(async todo => {
     await deleteDoc(doc(db, 'todos', todo.id))
-  }
+  }, [])
+  console.log('Simple Todo render')
 
   return <>
     <div>
