@@ -26,15 +26,14 @@ const VerticalDraggableContainer = () => {
         if (newItem.name.trim() === '')
             return
         dispatch({ type: 'setItems', payload: (() => {
-            const updatedItems = [...itemsState.items];
-            const emptySlotIndex = updatedItems.findIndex(item => item.name === '');
+            const emptySlotIndex = itemsState.items.findIndex(item => item.name === '');
             if (emptySlotIndex !== -1) {
-                updatedItems[emptySlotIndex] = {
+                itemsState.items[emptySlotIndex] = {
                     id: emptySlotIndex,
                     name: `${newItem.name}${newItem.details? " : " + newItem.details : "" }`
                 };
             }
-            return updatedItems;
+            return [...itemsState.items];
         })() })
         setNewItem({ name: '', details: ''});
     };
@@ -49,10 +48,11 @@ const VerticalDraggableContainer = () => {
             return;
         }
         dispatch({ type: 'setItems', payload: (() => {
-            const updatedItems = [...itemsState.items];
-            updatedItems[index].name = updatedItems[draggedItem].name
-            updatedItems[draggedItem].name = ""
-            return updatedItems;
+            if (index === draggedItem)
+                return itemsState.items
+            itemsState.items[index].name = itemsState.items[draggedItem].name
+            itemsState.items[draggedItem].name = ""
+            return [...itemsState.items];
         })() })
         setDraggedItem(index);
     };
