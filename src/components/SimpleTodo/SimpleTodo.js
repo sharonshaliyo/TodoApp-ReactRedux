@@ -1,5 +1,7 @@
-import React, { useEffect, useState, useCallback } from 'react'
-import { Box, Button, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@mui/material'
+import React, { useEffect, useState, useCallback, useMemo } from 'react'
+import { Box, Button, Stack, Table, TableBody,
+  TableCell, TableContainer, TableHead, TableRow,
+  TextField, Typography, Checkbox, FormControlLabel } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import { addDoc, collection, deleteDoc, doc, onSnapshot, query, updateDoc } from 'firebase/firestore'
 import { useDispatch, useSelector } from 'react-redux'
@@ -12,6 +14,7 @@ const SimpleTodo = () => {
   const dispatch = useDispatch()
   const todos = useSelector(store => store.todosReducer.todos)
   const [todoForm, setTodoForm] = useState({ title: '', desc: '' })
+  const [hideCompleted, setHideCompleted] = useState(false)
 
   const onFieldChange = (field, value) => {
     setTodoForm({
@@ -60,6 +63,11 @@ const SimpleTodo = () => {
   }, [])
   console.log('Simple Todo render')
 
+  const filteredTodos = useMemo(() => {
+    console.log('useMemo')
+    return hideCompleted ? todos.filter(t => !t.completed) : todos
+  }, [todos, hideCompleted])
+
   return <>
     <div>
       <Typography color="primary" variant="h5" style={{ fontWeight: 600 }} sx={{ mb: 3, mt: 1 }}>
@@ -97,11 +105,13 @@ const SimpleTodo = () => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Task</TableCell>
+                <TableCell>
+                  Tasks ( <FormControlLabel control={<Checkbox onChange={(v) => { console.log(v, hideCompleted); setHideCompleted(!hideCompleted) }} checked={hideCompleted} />} label="Hide completed" />)
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {todos.map(todo => <SimpleTodoItem todo={todo} toggleComplete={toggleComplete} onDeleteTodo={onDeleteTodo} key={todo.id} />)}
+              {filteredTodos.map(todo => <SimpleTodoItem todo={todo} toggleComplete={toggleComplete} onDeleteTodo={onDeleteTodo} key={todo.id} />)}
             </TableBody>
           </Table>
         </TableContainer>
