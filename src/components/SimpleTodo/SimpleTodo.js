@@ -106,7 +106,7 @@ const SimpleTodo = () => {
             <TableHead>
               <TableRow>
                 <TableCell>
-                  Tasks ( <FormControlLabel control={<Checkbox onChange={(v) => { console.log(v, hideCompleted); setHideCompleted(!hideCompleted) }} checked={hideCompleted} />} label="Hide completed" />)
+                  Tasks ( <FormControlLabel control={<Checkbox onChange={ () => setHideCompleted(!hideCompleted) } checked={hideCompleted} />} label="Hide completed" />)
                 </TableCell>
               </TableRow>
             </TableHead>
