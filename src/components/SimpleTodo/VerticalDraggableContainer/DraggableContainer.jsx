@@ -39,29 +39,29 @@ const VerticalDraggableContainer = () => {
     };
 
     const handleDragStart = (e, index) => {
-        setDraggedItem(index);
+        setDraggedItem({ ...itemsState.items[index] });
     };
 
     const handleDragOver = (e, index) => {
         e.preventDefault();
-        if (draggedItem === null || Math.abs(draggedItem - index) !== 1) {
+        if (draggedItem === null || Math.abs(draggedItem.id - index) !== 1) {
             return;
         }
         dispatch({ type: 'setItems', payload: (() => {
-            if (index === draggedItem)
+            if (index === draggedItem.id)
                 return itemsState.items
-            itemsState.items[index].name = itemsState.items[draggedItem].name
-            itemsState.items[draggedItem].name = ""
+            itemsState.items[index].name = draggedItem.name
+            itemsState.items[draggedItem.id].name = ""
             return [...itemsState.items];
         })() })
-        setDraggedItem(index);
+        setDraggedItem({ ...itemsState.items[index] });
     };
 
     const handleDragEnd = () => {
         setDraggedItem(null);
     };
 
-    console.log(itemsState)
+    // console.log(itemsState)
     return (
         <div>
             <div style={{ margin: '10px 0' }}>
