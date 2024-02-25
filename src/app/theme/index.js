@@ -1,5 +1,8 @@
 export const lightTheme = `{
     "palette": {
+        "background": {
+            "default": "#e4f0e2"
+          },
         "primary": {
             "main": "#357a38"
         },
@@ -34,6 +37,9 @@ export const lightTheme = `{
 
 export const darkTheme = {
     palette: {
+        background: {
+            default: "#222222"
+          },
         primary: {
             main: '#1769aa'
         },
