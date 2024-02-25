@@ -10,9 +10,7 @@ import SimpleTodo from '../components/SimpleTodo'
 import baseTheme from './theme/baseTheme'
 
 import VerticalDraggableContainer from '../components/SimpleTodo/VerticalDraggableContainer/DraggableContainer.jsx'
-import TasksApp from '../components/TasksApp/index.js'
 // const VerticalDraggableContainer = React.lazy(() => import('../components/SimpleTodo/VerticalDraggableContainer/DraggableContainer.jsx'))
-// const TasksApp = React.lazy(() => import('../components/TasksApp/index.js'))
 
 const themeMap = {
   light: lightTheme,
@@ -79,13 +77,10 @@ const App = (props) => {
           <NavLink to="/">Home</NavLink>
           <NavLink style={{ marginLeft: 16 }} to="/vertical">Vertical Tasks</NavLink>
           <NavLink style={{ marginLeft: 16 }} to="/tasksapp">Tasks App</NavLink>
-
           <Routes >
             <Route exact path="/" element={<SimpleTodo />} ></Route>
             <Route exact path="/vertical" element={<Suspense fallback={<>Loading...</>}><VerticalDraggableContainer /></Suspense>} ></Route>
-            <Route exact path="/tasksapp" element={<Suspense fallback={<>Loading...</>}><TasksApp /></Suspense>} ></Route>}
             <Route exact path="/vertical" element={<VerticalDraggableContainer />} ></Route>
-            <Route exact path="/tasksapp" element={<TasksApp />} ></Route>
           </Routes>
         </BrowserRouter> */}
       </Paper>
